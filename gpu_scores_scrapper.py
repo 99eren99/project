@@ -15,9 +15,11 @@ prices_list=[]
 for url in urls:
     page=requests.get(url)
     soup=BeautifulSoup(page.content, "html.parser")
+    soup = soup.find('ul', class_='chartlist')
     gpu_names=soup.find_all("span",class_="prdname")
     scores=soup.find_all("span",class_="count")
     prices=soup.find_all("span",class_="price-neww")
+    print(len(gpu_names), len(scores), len(prices))
     for item in gpu_names:
         gpu_names_list.append(item.text)
     for item in scores:
